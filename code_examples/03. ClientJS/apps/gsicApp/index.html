@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+   </script>
+   <script src="js/ModeloClasses.js"></script>
+   <script src="js/ModeloStudent.js"></script>
+   <script>
+      var classes = new ModeloClasses(),
+          student = new ModeloStudent();
+
+      function renderStudents (students) {
+          console.log(students);
+      }
+
+      function renderClass (objetoClasses) {
+        var domClasses = '.classes',
+            classes = objetoClasses.classes,
+            tmplateLink = '<li><a href="#{id}">{name}</a></li>',
+            tmp = '',
+            local,
+            i;
+        tmp += '<ul>';
+        for (i = 0; i < classes.length; i++) {
+            local = tmplateLink.replace('{id}',classes[i].id);
+            local  = local.replace('{name}', classes[i].name);
+            tmp += local;
+        }
+        tmp += '</ul>';
+        
+        $(domClasses).html(tmp);
+        
+        $('.classes > ul').delegate('a','click',function(e){
+            var id = $(e.target).attr('href');
+            id = id.slice(1,id.length);
+            student.getStudentByClass(id, renderStudents);
+         });
+      }
+
+
+window.onload = function (){
+  //1. get classes
+  classes.getClasses(renderClass);
+
+
+}
+   </script>
+  </head>
+  <body>
+    <header>
+        <h1>Colegio Retarmar</h1>
+    </header>
+    <section class="classes">
+    </section>
+
+    <section class="students">
+    </section>
+  </body>
+  
+</html>

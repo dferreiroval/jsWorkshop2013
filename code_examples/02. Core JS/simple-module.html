@@ -1,0 +1,47 @@
+<script>
+/*
+* JAVASCRIPT MODULE EXAMPLE
+* This snippet will show you how you can levarage the power of prototypes, functionss and private variables
+* in order to create isolated pieces of funtionality.
+*/
+
+
+/*
+* This is a regular function working as a constructor
+*/
+function Wine (config) {
+	this.name = config.name || 'No name';
+	this.vintage = config.vintage;
+	this.prices = config.prices || {};
+}
+
+/*
+* We create a new prototype of our funtion in order to create
+* our own methods and properties.
+*/
+Wine.prototype = {
+	getName: function () {
+		return this.name;
+	},
+	getVintage: function () {
+		return this.vintage;
+	},
+	getPrice: function (size) {
+		var prices = this.prices,
+			selectedSize;
+
+		if (size) {
+			return prices[size];
+		}
+	}
+};
+
+/*
+* Every time we instanciate a Wine Object, it will have it's own properties (like "name" or "vintage")
+* and it will have the functionality defined in the prototype object (getter methods).
+*/
+
+//Open and play with the console to see how your wine item looks like.
+var myWine = new Wine({name: 'Bordeux'});
+
+</script>

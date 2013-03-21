@@ -1,0 +1,25 @@
+<script>
+/*
+* This is example is to show how the 'hoisting' works in JavaScript
+* Basically no matter where in the functon you define a variable, it will be as if you defined on the top.
+* To understand better this concept, just run this example in your browser.
+*/
+
+//defining a global variable:
+var foo = true;
+
+function bar() {
+    if (foo) {
+        var foo = 'alert should display this, right?...';
+    }
+
+    alert(foo);
+}
+
+</script>
+
+<!-- 
+	NOTE: Remember to never put javascript within the HTML!,
+		  This is just for simplicity! ;)
+-->
+<input type="button" value="Foo?" onclick="bar()"/>

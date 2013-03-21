@@ -1,0 +1,25 @@
+<body>
+</body>
+<script>
+/*
+* This is example is to understand the "dynamic dom"
+* Everything we create throught Javascript will not be visible in the source code (since is created dynamically)
+* But you can inspect the real current DOM using the devTools
+*/
+
+//create a new Element
+var myDiv = document.createElement('div');
+
+//adding a class atributte
+myDiv.className = 'foo';
+
+//put some content on it
+myDiv.innerHTML = 'Try to find me in the source code, and you will fail!';
+
+//Append it to the dom so we can see it
+document.body.appendChild(myDiv);
+
+//let add some id just for fun
+myDiv.id = 'myId';
+	
+</script>

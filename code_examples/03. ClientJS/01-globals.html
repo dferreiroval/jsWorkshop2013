@@ -1,0 +1,29 @@
+<script>
+/*
+* EXAMPLE OF GLOBAL VARIABLES
+* This is a simple example to show how easy we can create and pollute the global space
+* Any variable we declare without the the reserved word var will be assumed to be global
+* Check the console to see the results of this example.
+*/	
+
+//define a global variable called counter:
+var counter = 100;
+
+console.log('Counter value:' + counter);
+
+function foo () {
+	//Note  that we FORGOT the 'var' keyword
+	counter = 50;
+	return 'counting: ' + counter;
+}
+
+//let's see what happen after we call foo...
+foo();
+
+console.log('Counter value: ' + counter);
+//remember that all globals are members of the global ofbject 'window'
+console.log('Global window "counter" value: ' + window.counter);
+
+</script>
+
+Check the console and the page source code to understand this example!

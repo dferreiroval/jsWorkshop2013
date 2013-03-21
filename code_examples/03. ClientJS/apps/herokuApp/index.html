@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Twitter Locator!</title>
+<link rel="stylesheet" href="css/styles.css">
+
+<!-- We use defer in order to don't block the rendering of the page...-->
+<!-- Libraries -->
+<script defer src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script>
+
+<script defer src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<!-- Load the modules (remember that defer keeps the order) -->
+<script defer src="app.js"></script>
+<script defer src="models/TwitterModel.js"></script>
+<script defer src="models/YahooGeoModel.js"></script>
+<script defer src="utils/Locator.js"></script>
+
+<script id="trends-template" type="text/x-handlebars-template">
+  <ul class="trends">
+  {{#trends}}
+  	<li><a href="{{url}}">{{name}}</a></li>
+  {{/trends}}
+  </ul>
+</script>
+
+<!-- Inline code -->
+<script> 
+window.onload = function () {
+	APP.run();
+}
+</script>
+
+</head>
+
+<body>
+	<header>
+		<h1>Twitter Locator!</h1>
+	</header>
+
+	<section class="tweets loading"></section>
+</body>
+</html>

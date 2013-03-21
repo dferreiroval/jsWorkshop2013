@@ -1,0 +1,63 @@
+body {
+	background: #009bda;
+    background: -moz-radial-gradient(center, ellipse cover,  #009bda 0%, #0087d2 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#009bda), color-stop(100%,#0087d2));
+    background: -o-radial-gradient(center, ellipse cover,  #009bda 0%,#0087d2 100%);
+    background: -ms-radial-gradient(center, ellipse cover,  #009bda 0%,#0087d2 100%);
+    background: radial-gradient(ellipse at center,  #009bda 0%,#0087d2 100%);
+
+    padding: 0px;
+    margin: 0px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 30px;
+    color: #333333;   
+    text-align: center; 
+}
+header {
+	color: white;
+}
+.loading {
+    opacity: 0;
+	text-align: center;
+	margin: 0 auto;
+	width:100%;
+    -webkit-animation: blink 1.5s infinite;
+}
+
+@-webkit-keyframes blink {
+  0%  { opacity: 0; }
+  50% { opacity: 1; }
+  100% {opacity: 0; }
+}
+
+.loading:after {
+	content: "Loading trending tweets...";
+}
+
+.trends {
+    padding: 0;
+    border-radius: 5px;
+    max-width: 50%;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.trends li {
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.trends li:nth-child(even) {
+    background: rgb(231, 239, 255);
+}
+
+.trends li:nth-child(odd) {
+    background: rgb(255, 255, 255);
+}
+
+.trends a {
+    color: black;
+    text-decoration: none;
+}

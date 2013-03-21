@@ -1,0 +1,932 @@
+<!--
+GSIC 2013 Workshop Slides.
+
+Google IO 2012 HTML5 Slide Template
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+URL: https://code.google.com/p/io-2012-slides
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>From the Inside Out</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="all" href="theme/css/workshop.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/sub_talleres.png"></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/gsicminilogo.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide class="bottom-me">
+    <hgroup>
+      <h2>Whoami</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Software Engineer. Graduated at FIC (UDC)</li>
+        <li>FrontEnd Engineer at Yahoo!
+          <ul>
+            <li>Member of the Search Platform team</li>
+            <li>Mojito & Cocktails Ambassador</li>
+            <li>Local Paranoid</li>
+          </ul>
+        </li>
+        <li>Senior FrontEnd Engineer at Salesforce.com</li>
+          <ul>
+              <li>
+                Working on the Touch team.
+              </li>
+          </ul>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="fill" style="background: url(images/javajs.png) center no-repeat; background-size:45%;">
+    <hgroup class="build">
+      <h2>Never mistake this again!</h2>
+      <h3>The only thing in common between JS and Java is the name</h3>
+    </hgroup>
+  </slide>
+
+  <slide class="segue dark quote nobackground">
+    <aside class="gdbar right bottom"><img src="images/gsicminilogo.png"></aside>
+    <article class="flexbox vtop auto-fadein">
+      <q>
+        Despite its popularity, few know that JavaScript is a very nice dynamic object-oriented general-purpose programming language. 
+        How can this be a secret? Why is this language so misunderstood?
+      </q>
+      <div class="author">
+        Douglas<br>
+        Crockford
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Why is this language so misunderstood?</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>The name
+            <ul>
+                <li>The Java- prefix create anything but confusion</li>
+            </ul>
+        </li>
+        <li>Moving target
+          <ul>
+              <li>
+                  The first versions of JavaScript were quite weak.
+              </li>
+          </ul>
+        </li>
+        <li>Design errors</li>
+        <li>Lousy Implementations</li>
+        <li>Bad books</li>
+        <li>Amateurs...</li>
+
+      </ul>
+    </article>
+  </slide>
+
+   <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/gsicminilogo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>JavaScript Core</h2>
+      <h3>Let's get started!</h3>
+    </hgroup>
+  </slide>
+
+   <slide>
+    <hgroup>
+      <h2>Data types</h2>
+      <!-- <h3>The basics</h3>-->
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+  // Strings: 
+  'This is a string';
+  "Isn't  this a string? Yes!"
+  
+  // Numbers:
+  7 + 7.7 // integer + float
+
+  // Functions:
+  function helloWorld () {} //functions are special kind of objects
+
+  // Arrays:
+    [1, 'foo', 4.3]
+
+  // Objects:
+  {hello: 'World!'}
+      </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Functions</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+  // Simple function definition:
+  function sum (a, b) {
+    return a + b;
+  }
+
+  // Recursive function:
+  function factorial(x) {
+    if (x <= 1) return 1;
+    return x * factorial(x-1);
+  }
+
+  // Function expressions can also be used as arguments to other functions:
+  mydata.sort(function(a,b) { return a-b; });
+
+      </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Objects</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="javascript">
+var empty = {};                           // An object with no properties
+var point = { x:0, y:0 };                 // Two properties
+var point2 = { x:point.x, y:point.y+1 };  // More complex values
+var book = {                      
+    "main title": "JavaScript",           // Property names include spaces,
+    'sub-title': "The Definitive Guide",  // and hyphens, so use string literals
+    "for": "all audiences",               // for is a reserved word, so quote
+    author: {                             // The value of this property is
+        firstname: "David",               // itself an object.  Note that
+        surname: "Flanagan"               // these property names are unquoted.
+    }
+};
+// Object creation with new:
+var o = new Object();     // Create an empty object: same as {}.
+var a = new Array();      // Create an empty array: same as [].
+      </pre>
+    </article>
+    <footer class="source">** Examples taken from David Flanagan's book: 'Javascript the definitive guide'</footer>
+  </slide>
+
+   <slide>
+    <hgroup>
+      <h2>Variables (I)</h2>
+       <h3>The basics</h3>
+    </hgroup>
+    <article style="margin:0" class="build">
+      <pre class="prettyprint" data-lang="javascript">
+  <b>var scope = "global";</b>        // Declare a global variable
+  function checkscope() {
+    <b>var scope = "local";</b>      // Declare a local variable with the same name
+    return scope;             // Return the local value, not the global one
+  }
+  checkscope()                  // => "local"
+      </pre>
+
+      <pre class="prettyprint" data-lang="javascript">
+  <b>var scope = "global scope";</b>          // A global variable
+  function checkscope() {
+    <b>var scope = "local scope";</b>       // A local variable
+    function nested() {
+        <b>var scope = "nested scope";</b>  // A nested scope of local variables
+        return scope;                // Return the value in scope here
+    }
+    return nested();
+  }
+      </pre>
+    </article>
+  </slide>
+
+  <slide>
+      <hgroup>
+        <h2>Variables (II)</h2>
+        <h3>Hoisting</h3>
+      </hgroup>
+        <pre class="prettyprint" data-lang="javascript">
+  var scope = "global";
+  function f() {
+    console.log(scope);
+    var scope = "local"; // Variable initialized here, but defined everywhere
+    console.log(scope); // what this will write into the console?
+  }
+        </pre>
+  <article class="smaller build">
+    <p>This feature of JavaScript is informally known as hoisting: JavaScript code behaves as if all variable declarations in a function (but not any associated assignments) are “hoisted” to the top of the function.</p>
+  </article>
+      
+  </slide>
+
+  <slide>
+      <hgroup>
+        <h2>Closures</h2>
+      </hgroup>
+      <article style="margin-top:15px" class="build">
+        <p>How would you create a counter function which returns the next integer everytime you call it?</p>
+        <pre class="prettyprint" data-lang="javascript">
+  // is this alright?
+  var count = 0;
+  counter = function () {
+    count++;
+  }
+</pre>
+      <p>Well... it works, but we are polluting the global space... Can we do better?</p>
+      <pre class="prettyprint" data-lang="javascript">
+  function counter () {
+    <b>var privateCounter = 0;</b>
+    return {
+      count: function () { 
+        <b>return privateCounter++;</b>
+      }
+  }}
+</pre>
+      </article>
+
+  </slide>
+
+  <slide>
+      <hgroup>
+        <h2>Closures (II)</h2>
+      </hgroup>
+      <article>
+        <pre class="prettyprint" data-lang="javascript">
+  function sandwichMaker() {
+    var magicIngredient = "peanut butter";
+    function make(filling) {
+      return magicIngredient + " and " + filling;
+    }
+  }
+  var f = sandwichMaker();
+  f("jelly"); //"peanut butter and jelly"
+</pre>
+      <p><b>Things to remember:</b></p>
+      <ul>
+        <li>Functions can refer to vairables defined in outer scopes</li>
+        <li>Closures can outlive the function that creates them.</li>
+        <li>Closures internally store references to their outer variables, and can both read and write and update their stored variables</li>
+      </ul>
+    </article>
+
+  </slide>
+  <slide>
+     <hgroup>
+        <h2>Classes and Modules</h2>
+      </hgroup>
+      <article class="build">
+      <p>1. The constructor:</p>
+      <pre class="prettyprint" data-lang="javascript">
+  function User (name, password) {
+    this.name = name;
+    this.password = password;
+  }</pre>
+  <p>2. The Prototype:</p>
+      <pre class="prettyprint" data-lang="javascript">
+  User.prototype = {
+    getName: function (){ return this.name;}
+    setName: function (name){ this.name = name;}
+  };</pre>
+  <p>3. The Instance:</p>
+    <pre class="prettyprint" data-lang="javascript">
+  var u = new User('foo','bar');</pre>
+
+    </article>
+  </slide>
+
+  <slide>
+     <hgroup>
+        <h2>Classes and Modules (II)</h2>
+      </hgroup>
+      <pre class="prettyprint" style="margin-top:15px; font-size:15px; line-height:24px" data-lang="javascript">
+function Range(from, to) {
+    this.from = from; // Store the start and end points (state) of this new range object.
+    this.to = to; // These are noninherited properties that are unique to this object.
+}
+// All Range objects inherit from this object.
+// Note that the property name must be "prototype" for this to work.
+Range.prototype = {
+    // Return true if x is in the range, false otherwise
+    includes: function(x) { return this.from <= x && x <= this.to; },
+    // Invoke f once for each integer in the range.
+    foreach: function(f) {
+        for(var x = Math.ceil(this.from); x <= this.to; x++) f(x);
+    },
+    // Return a string representation of the range
+    toString: function() { return "(" + this.from + "..." + this.to + ")"; }
+};
+// Here are example uses of a range object
+var r = new Range(1,3);   // Create a range object
+r.includes(2);            // => true: 2 is in the range
+r.foreach(console.log);   // Prints 1 2 3
+console.log(r);           // Prints (1...3)</pre>
+  </slide>
+
+  <slide>
+     <hgroup>
+        <h2>Classes and Modules (III)</h2>
+      </hgroup>
+      <article class="flexbox vcenter">
+        <img src="images/class.png" class="reflect" alt="Description" title="Description">
+        <footer class="source">source: Javascript: The definitive guide</footer>
+    </article>
+
+  </slide>
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/gsicminilogo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>JavaScript: The Client Side</h2>
+      <h3>Understading the browser</h3>
+    </hgroup>
+  </slide>
+
+ <slide>
+    <hgroup>
+      <h2>Developper tools</h2>
+      <h3>Your best friend</h3>
+    </hgroup>
+    <article class="flexbox vcenter" style="margin:0">
+      <img src="images/devtools.png">
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Embedding JavaScript</h2>
+    </hgroup>
+    <article>
+      <p>JavaScript code can appear inline within an HTML file between &lt;script&gt; and &lt;/script&gt; tags:</p>
+      <pre class="prettyprint" data-lang="javascript">
+  &lt;script&gt;
+  // Your JavaScript code goes here
+  &lt;/script&gt;
+    </pre>
+    <p>The <i>script</i> tag supports a src attribute that specifies the URL of a file containing JavaScript code. It is used like this:</p>
+      <pre class="prettyprint" data-lang="javascript">
+  &lt;script src="http://foo.com/myjsfile.js"&gt;&lt;/script&gt;</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Globals</h2>
+      <h3>The Window Object</h3>
+    </hgroup>
+    <article>
+      <p>When you define a global variable in the browser, automatically gets attached to the <b>window</b> object:</p>
+      <ul>
+        <li>Timers (setTimeout() and setInterval() ).</li>
+        <li>Browser Location and Navigation </li>
+        <li>Browsing History </li>
+        <li> Browser and Screen Information (alert(), confirm(), and prompt() ).
+        <li>Error Handling </li>
+        <li>Document Elements As Window Properties </li> 
+        <li>Multiple Windows and Frames </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>DOM Manipulation</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <p>The Document Object Model, or DOM, is the fundamental API for representing and manipulating the content of HTML and XML documents.</p>
+      <img src="images/tree.png">
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>DOM Manipulation (II)</h2>
+      <h3>Where is my code?</h3>
+    </hgroup>
+    <article>
+      <p>All the elements that we create dynamically using JavaScript will not appear in the source code. In orde to view the current state you will have to check your developper tools!</p>
+      <pre class="prettyprint" data-lang="javascript">
+  &lt;body&gt;
+  &lt;/body&gt;      
+  &lt;script&gt;
+    var myDiv = document.createElement('div');
+    //adding a class atributte
+    myDiv.className = 'foo';
+    //put some content on it
+    myDiv.innerHTML = 'Try to find me in the source code, and you will fail!';
+    //Append it to the dom (check in the dev tools)
+    document.body.appendChild(myDiv);
+  &lt;/script&gt;</pre>
+
+    </article>
+  </slide>
+
+  <slide>
+      <hgroup>
+        <h2>The Asyncronous paradigm</h2>
+        <h3>Learning to program with callbacks</h3>
+      </hgroup>
+      <article >
+        <p>Notice that in JavaScript almost everything happens in an async way:</p>
+        <ul>
+          <li>User events (clicks, scrolls, resizes, touch)</li>
+          <li>Network resources (load, error, cache)</li>
+          <li>Render resources (ready, load...)</li>
+        </ul>
+        <pre class="prettyprint" data-lang="javascript">
+  &lt;script&gt;
+    setTimeout(function (){
+      alert('Hello World!');
+    }, 3000);
+  &lt;/script&gt;</pre>
+      </article>
+    </slide>
+
+    <slide>
+      <hgroup>
+        <h2>The Asyncronous paradigm (II)</h2>
+        <h3>Handling Events</h3>
+      </hgroup>
+      <article >
+        <p>Let's see how easy we can attach some events:</p>
+        <pre class="prettyprint" data-lang="javascript">
+  &lt;button id="mybutton"&gt;Click me&lt;/button&gt;
+  &lt;script&gt;
+    var b = document.getElementById("mybutton");
+    b.onclick = function() { 
+      alert("Thanks for clicking me!"); 
+    };
+    b.addEventListener("click", function() { 
+        alert("Thanks again!"); 
+    }, false);
+  &lt;/script&gt;</pre>
+  <div>
+    <button id="mybutton">Click me</button>
+<script>
+var b = document.getElementById("mybutton");
+b.onclick = function() { alert("Thanks for clicking me!"); };
+b.addEventListener("click", function() { alert("Thanks again!"); }, false);
+</script>
+  </div>
+      </article>
+    </slide>
+
+  <slide>
+      <hgroup>
+        <h2>Event delegation</h2>
+        <h3></h3>
+      </hgroup>
+      <article class="flexbox vcenter">
+        <p>
+          Event delegation is, quite simply, using a single event handler to manage a particular type of event for the entire page. This isn’t a new idea, but it is an important one to grasp for performance.
+        </p>
+          <img src="images/bubbling.png">
+      </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/gsicminilogo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>JavaScript Libraries</h2>
+      <h3>What, when and why?</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+      <hgroup>
+        <h2>Using JavaScript Libraries</h2>
+        <h3>When and why to use them?</h3>
+      </hgroup>
+      <article class="smaller">
+        <p>
+          There are two main big reasons behind: 
+        </p>
+          <ul>
+            <li>Cross-browser compatibility </li>
+            <li>Lack of various native implementations. </li>
+          </ul>
+          <p>Those libraries, create an easy-to-use implementation which helps to normalize behaviour across browsers and add additional functionality, specifically as it relates to the the four core aspects of most JavaScript libraries: </p>
+          <ul>
+            <li>Event handling</li> 
+            <li>Animations</li> 
+            <li>DOM (manipulation and traversal)</li>
+            <li>AJAX</li>
+          </ul>
+        </p>
+          
+      </article>
+  </slide>
+
+   <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/gsicminilogo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Scripted HTTP</h2>
+      <h3>AJAX, JSONP, AJAX2, CORS</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ajax</h2>
+      <h3>Asynchronous JavaScript and XML (and others xD)</h3>
+    </hgroup>
+    <article>
+      <p>The key feature of an Ajax application is that it uses scripted HTTP to initiate data exchange with a web server without causing pages to reload. </p><p>A web application might use Ajax technologies to log user interaction data to the server or to improve its start-up time by displaying only a simple page at first and then downloading additional data and page components on an as-needed basis.</p>
+
+      <p>The <span class="green">X in AJAX</span> is optional. Historical legacy of the days when XML was a powerful buzzword. Ajax techniques work with XML documents, of course, but the use of XML is purely optional and has actually become relatively rare</p>
+    </article>
+    
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Ajax with JSON</h2>
+      <h3>Asynchronous JavaScript and JSON (that's better)</h3>
+    </hgroup>
+    <article>
+      <p>JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. It is easy for machines to parse and generate. It is based on a subset of the JavaScript Programming Language</p>  
+      <pre class="prettyprint" data-lang="JSON">
+  {
+    "employees": [
+      { "firstName":"John" , "lastName":"Doe" }, 
+      { "firstName":"Anna" , "lastName":"Smith" }, 
+      { "firstName":"Peter" , "lastName":"Jones" }
+    ]
+  }
+      </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>XML vs. JSON</h2>
+      <h3>Short answer: be pragmatic!</h3>
+    </hgroup>
+    <article>
+      <p>JSON Pros vs XML:</p>
+        <ul>
+          <li>Simple syntax, which results in less "markup" overhead compared to XML.</li>
+          <li>Easy to use with JavaScript</li>
+          <li>Lightweight for transfers</li>
+        </ul>
+      <p>JSON Cons</p>
+        <ul>
+          <li>There is no schema or structure validation</li>
+        </ul>
+      </p>
+    </article>
+  </slide>
+
+  <slide>
+      <hgroup>
+      <h2>Same Origin Policy</h2>
+    </hgroup>
+    <article>
+        <p>"The policy permits scripts running on pages originating from the same site, to access each other's methods and properties with no specific restrictions, but prevents access to most methods and properties across pages on different sites.[1] Same origin policy also applies to <b>XMLHttpRequest</b> and to <b>robots.txt</b>". 
+        </p>
+        <pre class="prettyprint" data-lang="javascript">
+  // Scripts from any origin can be loaded
+  &lt;script src="//scheme://whatever.domain.com"&gt;&lt;/script&gt;
+  &lt;image src="//scheme://whatever.domain.com"/&gt;
+
+  // ajax calls to any other domain will fail due to the SOP.
+    Y.io('http://other.domain.com/xml', cfg);
+    $.ajax('http://other.domain.com/json', cfg);
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+      <hgroup>
+      <h2>AJAX2 & CORS</h2>
+    </hgroup>
+    <article>
+        <p>
+            Cross-Origin Resource Sharing (CORS) defines how the browser and server must communicate when accessing sources across origins.
+        </p>
+        <p>
+           The basic idea behind CORS is to use custom HTTP headers to allow both the browser and the server to know enough about each other to determine if the request or response should succeed or fail.
+        </p>
+        <p>Header sent on the request:</p>
+        <pre class="prettyprint" data-lang="text">
+          Origin: http://www.nczonline.net</pre>
+        <p>Header example response:</p>
+        <pre class="prettyprint" data-lang="text">
+          Access-Control-Allow-Origin: http://www.nczonline.net</pre>
+    </article>
+    <footer class="source">Nicholas Zakas: http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/</footer>
+  </slide>
+
+  <slide>
+      <hgroup>
+      <h2>JSONP</h2>
+      <h3>JSON With Padding</h3>
+      </hgroup>
+      <article>
+        <pre class="prettyprint" data-lang="JSON">
+  {
+    "Name": "Foo", "Id": 1234
+  }</pre>
+        <pre class="prettyprint" data-lang="Javascript">
+  &lt;script src="http://server2.example.com/Users/1234"&gt;&lt;/script&gt; </pre>
+
+        <pre class="prettyprint" data-lang="Javascript">
+  parseResponse({"Name": "Foo", "Id": 1234, "Rank": 7});</pre>
+
+        <pre class="prettyprint" data-lang="Javascript">
+  &lt;script type="text/javascript" 
+    src="http://server2.example.com/Users/1234?jsonp=parseResponse"&gt;
+  &lt;/script&gt;
+        </pre>
+      </article>
+    </hgroup>
+  </slide>
+
+<slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/gsicminilogo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Performance</h2>
+      <h3>Pushing the web</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+      <hgroup>
+      <h2>Peformance (I)</h2>
+      <h3>Best practices</h3>
+      </hgroup>
+      <article>
+        <ul>
+          <li>Reduce DNS lookups
+            <ul>
+              <li>130 ms average lookup time! Even slower on mobile..</li>
+            </ul>
+          </li>
+            <li> Avoid redirects
+              <ul>
+                <li> Often results in new handshake (and maybe even DNS)</li>
+              </ul>
+          </li>
+
+<li> Make fewer HTTP requests<ul><li> No request is faster than no request</li></ul></li>
+
+<li> Flushing the document early<ul>
+<li> Help document parser discover external resources early!</li></ul></li>
+<li> Use a CDN
+  <ul>
+    <li> Faster RTT == faster page loads</li>
+    <li> Also, terminate SSL closer to the user!</li>
+  </ul>
+</li>
+        </ul>
+      </article>
+  </slide>
+
+  <slide>
+      <hgroup>
+      <h2>Peformance (II)</h2>
+      <h3>Reduce the size of your page</h3>
+      </hgroup>
+      <article>
+        <ul>
+          <li>GZIP your assets
+            <ul>
+              <li> 80%  compression ratio text</li>
+            </ul>
+          </li>
+            <li> Optimize images
+              <ul>
+                <li> 60% total size of an average page! - Spriting, embedding</li>
+              </ul>
+          </li>
+
+<li> Add an expires header<ul><li> Caching an TTL</li></ul></li>
+
+        </ul>
+      </article>
+  </slide>
+
+  <slide>
+      <hgroup>
+      <h2>Peformance (III)</h2>
+      <h3>Optimize paints, don't block the parser!</h3>
+      </hgroup>
+      <article>
+        <ul>
+          <li>Place stylesheets at the top
+            <ul>
+              <li>  Rendered, and potentially DOM construction, is blocked on CSS!</li>
+            </ul>
+          </li>
+            <li> Load scripts asynchronously, whenever possible
+              <ul>
+                <li> Sync scripts <span class="red">block</span> the document parse</li>
+              </ul>
+          </li>
+<li> Place scripts at the bottom
+              <ul>
+                <li> "Unblocks" the document parser (since there is nothing to block)</li>
+              </ul>
+          </li>
+
+        </ul>
+      </article>
+  </slide>
+
+   <slide>
+      <hgroup>
+      <h2>Peformance (IV)</h2>
+      <h3>Hunt down & eliminate jank and memory leaks!</h3>
+      </hgroup>
+      <article>
+        <ul>
+          <li>Build buttery smooth pages (scroll included)
+            <ul>
+              <li>  60 FPS means 16.6 ms budget per frame</li>
+              <li>Use frames view to hunt down and eliminate jank</li>
+            </ul>
+          </li>
+            <li> Leverage hardware acceleration where possible
+              <ul>
+                <li> Let the GPU do what it's good at: alpha, translations</li>
+                <li> Avoid excessive CPU > GPU interaction</li>
+              </ul>
+          </li>
+<li> Eliminate JS and DOM memory leaks
+              <ul>
+                <li> Monitor and diff heap usage to identify memory leaks
+              </ul>
+          </li>
+          <li>
+            Test on mobile devices! Emulators are not enought!
+          </li>
+
+        </ul>
+      </article>
+  </slide>
+
+  <slide>
+      <hgroup>
+      <h2>Peformance (V)</h2>
+      <h3>Use (and learn) the right tools for the job</h3>
+      </hgroup>
+      <article>
+        <ul>
+          <li>Learn about Developer Tools
+            <ul>
+              <li>  Spend some time reading the docs, follow tutorials</li>
+              <li>http://bit.ly/devtools-tips</li>
+            </ul>
+          </li>
+            <li> PageSpeed Insights
+              <ul>
+                <li> Install the browser extension for quick diagnostics</li>
+              </ul>
+          </li>
+<li> WebPageTest.org & YSlow
+              <ul>
+                <li> Test your pages against multiple browsers</li>
+                <li>Test performance, not just UX acceptance!</li>
+              </ul>
+          </li>
+
+        </ul>
+      </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/gsicminilogo.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>Resources</h2>
+      <h3>Where and who to learn from!</h3>
+    </hgroup>
+  </slide>
+
+<slide>
+    <hgroup>
+      <h2>Useful web resources</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <li>
+          HTML
+          <ul>
+            <li><a href="http://html5doctor.com/">HTML5 Implementation by example</a></li>
+            <li><a href="http://www.html5rocks.com/">HTML5 tutorials and articles</a></li>
+            <li><a href="http://www.w3.org/TR/html5/">W3C HTML5 specs</a></li>
+          </ul>
+        </li>
+        <li>
+          JS
+          <ul>
+            <li><a href="http://www.smashingmagazine.com/2012/12/22/talks-to-help-you-become-a-better-front-end-engineer-in-2013/">Interesting FrontEnd Engineer talks</li>
+            <li><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">JavaScript design patterns</a></li>
+          </ul>
+        </li>
+        <li>
+          CSS
+          <ul>
+            <li><a href="http://learnlayout.com/">Learn CSS Layout</a></li>
+          </ul>
+        </li>
+        <li>
+          Performance
+          <ul>
+            <li><a href="http://browserdiet.com/">Interesting performance tips</li>
+        <li><a href="http://calendar.perfplanet.com/">Performance Calendar</a></li>
+          </ul>
+        </li>
+        <li>
+          Others
+          <ul>
+            <li><a href="http://discover-devtools.codeschool.com/">Mastering Chrome Dev Tools</a></li>
+            <li><a hred="http://www.youtube.com/watch?v=TZ-bgcJ6fQo">Sublime WorkFlow</a></li>  
+          </ul>
+        </li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Interesting People to @follow</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <li><a href="https://twitter.com/davidwalshblog">@davidwalshblog</a></li>
+        <li><a href="https://twitter.com/paul_irish">@paul_irish</a></li>
+        <li><a href="https://twitter.com/codepo8">@codepo8</a></li>
+        <li><a href="https://twitter.com/igrigorik">@igrigorik</a></li>
+        <li><a href="https://twitter.com/ericf">@ericf</a></li>
+        <li><a href="https://twitter.com/mrdoob">@mrdoob</a></li>
+        <li><a href="https://twitter.com/unscriptable">@unscriptable</a></li>
+        <li><a href="https://twitter.com/littlecalculist">@littlecalculist</a></li>
+        <li><a href="https://twitter.com/slicknet">@slicknet</a></li>
+        <li><a href="https://twitter.com/leaverou">@leaverou</a></li>
+        <li><a href="https://twitter.com/billwscott">@billwscott</a></li>
+        <li>And much more... you can take a look at who I'm following
+          <ul><li><a href="https://twitter.com/diervo">@diervo</a></li></ul>
+        </li>
+        
+      </ul>
+    </article>
+  </slide>
+
+
+  <!-- XXX BUILT IN SLIDES-->
+
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/gsicminilogo.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>console.log('Gracias');</h2>
+      <p>alert('Nos vemos en Octubre!');</p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/sub_talleres.png"></span>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>

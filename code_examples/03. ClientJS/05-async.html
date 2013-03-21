@@ -1,0 +1,58 @@
+<script>
+/*
+* ASYNC - Crono Example
+* This example show the async nature of JavaScript
+*
+* Module: @Crono
+* Public Methods:
+* 	+ startTimer(): start the time of the crono
+*   + setTimerCallback(callback): Sets the function to execute when the time of the crono is up.
+* Private Methods:
+	- _timeEnd(): Is called internally when the crono time is over. It invokes the user timerCallback
+*/
+
+function Crono (seconds, timerCallback) {
+	//time in seconds
+	this.time = 1000 * seconds;
+	//the function to call when finish or a empty one if none is provided.
+	this.timerCallback = timerCallback || function (){};
+}
+
+//Adding methods to our Crono Module:
+Crono.prototype = {
+	startTimer: function () {
+		//use the timeout function to execute a given function at a certain time.
+		setTimeout(this._timeEnd.bind(this), this.time);
+	},
+	setTimerCallback: function (callback) {
+		this.timerCallback = callback;
+	},
+	_timeEnd: function () {
+		//_timeENd is called by setInterval
+		//at this point we just need to call the user callback and we are done
+		this.timerCallback.call();
+	}
+};
+
+/* ====== Creating Instances ====== */
+
+//Instanciate a Crono to triger our function after 2 seconds
+var cronoTwoSeconds = new Crono(2),
+	myFunctionAfterTwo = function () {
+		console.log('Two seconds have been consumed! Right now timestamp is: ' + Date.now());
+	};
+
+cronoTwoSeconds.setTimerCallback(myFunctionAfterTwo);
+cronoTwoSeconds.startTimer();
+
+
+//Instanciate a crono and trigger after 6 seconds
+// this time we will set the function in the constructor
+var cronoFiveSeconds = new Crono(6, function () {
+	console.log('Six seconds have been consumed! Right now timestamp is: ' + Date.now());
+});
+cronoFiveSeconds.startTimer();
+
+console.log('Crono timers should execute shortly...');
+
+</script>

@@ -1,0 +1,8 @@
+.bottom-me {
+	background: url(../../images/me.png) bottom no-repeat;
+}
+
+.bottom {
+	position: absolute;
+	bottom:80px;
+}

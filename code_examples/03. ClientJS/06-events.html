@@ -1,0 +1,39 @@
+Click this window!
+
+<body style="font-size:18px; border: 1px solid black; width:220px;height:70px">
+	<div class="container" style="width:160px; background:orange">
+		Click this container!
+			<input id="myButton" type ="button" value="Click this button!"/>
+	</div>
+<body>
+<script>
+
+/*
+* Adding a event Listener on the button
+*/
+var button = document.querySelector('#myButton');
+
+button.onclick = function (e) {
+	console.log('1. This event got handled at the BUTTON level!!');
+}
+
+/*
+* Adding a event Listener on the container div
+*/
+
+var container = document.querySelector('.container');
+
+container.onclick = function (e) {
+	console.log('2. This event got triggered by the onclick within the CONTAINER!');	
+}
+
+/*
+* Adding a event Listener globally (on window object)
+*/
+
+window.addEventListener('click', function (e) {
+	console.log('3. This event got handled at the WINDOW level!!');
+});
+
+
+</script>

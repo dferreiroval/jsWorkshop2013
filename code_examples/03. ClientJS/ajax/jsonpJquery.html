@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+ var domain = 'http://gsic-jsonp.herokuapp.com';
+	$.ajax({
+		url: domain,
+		dataType: 'jsonp',
+		success: function (data) {
+			console.log(data);
+		}
+	});
+</script>
+</head>
+<body>
+
+</body>

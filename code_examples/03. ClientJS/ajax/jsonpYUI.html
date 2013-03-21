@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://yui.yahooapis.com/3.8.1/build/yui/yui-min.js"></script>
+<script>
+YUI().use('jsonp', function (Y) {
+	var domain = 'http://gsic-jsonp.herokuapp.com';
+	
+	Y.jsonp(domain + '?callback={callback}', function (data) {
+		console.log(data);
+	});
+});
+</script>
+</head>
+<body>
+
+</body>
