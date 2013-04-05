@@ -283,7 +283,7 @@ var a = new Array();      // Create an empty array: same as [].
         <pre class="prettyprint" data-lang="javascript">
   function sandwichMaker() {
     var magicIngredient = "peanut butter";
-    function make(filling) {
+    return function make(filling) {
       return magicIngredient + " and " + filling;
     }
   }
